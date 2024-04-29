@@ -1,13 +1,12 @@
 "use client";
 
-import SalCus from "@/components/SalCus";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 
 //* ---------------COMP---------------------/
-export default function Sales() {
+export default function Grn() {
   // const initialRow = {
   //   skuId: "",
   //   sku: "",
@@ -42,8 +41,6 @@ export default function Sales() {
 
       saleSku.amount = saleSku.price;
       saleSku.qty = 1;
-
-      // todo : the below row.sku_name should be changed to sku_id
 
       setRows((prev) => {
         if (prev.some((row) => row.sku_name === saleSku.sku_name)) return prev;
@@ -158,8 +155,6 @@ export default function Sales() {
       data: sale,
     });
 
-    // todo : the drop down options should be cleared after selection.
-
     setRows(() => []);
     setTotal(() => 0);
     setBalance(() => 0);
@@ -180,7 +175,6 @@ export default function Sales() {
   //* ---------------JSX---------------------/
   return (
     <main className="flex flex-col gap-2 p-2">
-      <SalCus />
       {/* //* ---------------XXXXX---------------------/ */}
       <div className="flex gap-2">
         <div className="w-80">
@@ -253,22 +247,6 @@ export default function Sales() {
             <h4>Total</h4>
             <p>{total}</p>
           </div>
-
-          <div className="flex gap-4">
-            <h4>Advance</h4>
-            <input
-              type="number"
-              min={0}
-              onChange={hAdvance}
-              disabled={total === 0}
-              value={advance}
-            />
-          </div>
-
-          <div className="flex gap-4">
-            <h4>Balance</h4>
-            <p>{balance}</p>
-          </div>
         </div>
         <div>
           <button
@@ -285,5 +263,3 @@ export default function Sales() {
     </main>
   );
 }
-
-// todo : save button should be disabled if no total amount and show notification in case of no total amount.
